@@ -1,5 +1,5 @@
 const express = require("express");
-const vagaRoutes = require("./routes/vaga.routes");
+const jobRoutes = require("./routes/job.routes");
 
 const PORT = 3000;
 
@@ -14,7 +14,7 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 // Routes
-app.use('/vagas', vagaRoutes);
+app.use('/vagas', jobRoutes);
 
 app.listen(PORT, () => {
     console.log(`[INFO] Server running on http://localhost:${PORT}`);

@@ -1,4 +1,4 @@
-const vagas = [
+const jobs = [
     {
         id: 1,
         titulo: "Desenvolvedor Backend",
@@ -41,7 +41,7 @@ const vagas = [
     }
 ];
 
-const vagaController = {
+const jobController = {
     create(_, res) {
         res.status(500).send('Not yet implemented')
     },
@@ -66,4 +66,4 @@ const vagaController = {
     },
 }
 
-module.exports = vagaController;
+module.exports = jobController;

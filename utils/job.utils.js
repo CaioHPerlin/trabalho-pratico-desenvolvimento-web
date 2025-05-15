@@ -2,7 +2,7 @@
 const requiredDtoFields = ['titulo', 'conhecimentos', 'remuneracao', 'beneficios', 'status'];
 
 const jobUtils = {
-  validateCreateJobDto (object) {
+  validateJobDto (object) {
     const missingFields = [];
     
     for (let i = 0; i < requiredDtoFields.length; i++) {

@@ -1,4 +1,4 @@
-const { validateIdParams, validateCreateJobDto } = require("../utils/job.utils");
+const { validateIdParams, validateJobDto } = require("../utils/job.utils");
 
 const jobs = [
     {
@@ -45,16 +45,16 @@ const jobs = [
 
 const jobController = {
     create(req, res) {
-        const [job, error] = validateCreateJobDto(req.body)
+        const [job, error] = validateJobDto(req.body)
         if (error) return res.status(400).send(error)
 
-        const novaVaga = {
+        const newJob = {
             id: jobs.length + 1,
             ...job
         };
 
-        jobs.push(novaVaga);
-        res.status(201).json(novaVaga);
+        jobs.push(newJob);
+        res.status(201).json(newJob);
     },
 
     findAll(_, res) {
@@ -66,9 +66,7 @@ const jobController = {
         if (error) return res.status(400).send('ID inválido');
 
         const index = jobs.findIndex(v => v.id === id);
-        if (index === -1) {
-            return res.status(404).send('Vaga não encontrada')
-        }
+        if (index === -1) return res.status(404).send('Vaga não encontrada');
 
         res.status(200).json(jobs[index]);
     },
@@ -78,9 +76,7 @@ const jobController = {
         if (error) return res.status(400).send('ID inválido');
 
         const index = jobs.findIndex(v => v.id === id);
-        if (index === -1) {
-            return res.status(404).send('Vaga não encontrada')
-        }
+        if (index === -1) return res.status(404).send('Vaga não encontrada');
 
         const deleted = jobs.splice(index, 1);
         res.status(200).json({ mensagem: 'Vaga removida com sucesso', vaga: deleted[0] });
@@ -91,11 +87,18 @@ const jobController = {
         if (error) return res.status(400).send('ID inválido');
 
         const index = jobs.findIndex(v => v.id === id);
-        if (index === -1) {
-            return res.status(404).send('Vaga não encontrada')
-        }
+        if (index === -1) return res.status(404).send('Vaga não encontrada');
 
+        const [job, bodyError] = validateJobDto(req.body);
+        if (bodyError) return res.status(400).send(bodyError);
 
+        const newJob = {
+            id,
+            ...job
+        };
+
+        jobs[index] = newJob;
+        res.status(201).json(newJob);
     },
 }
 

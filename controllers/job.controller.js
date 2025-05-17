@@ -47,19 +47,22 @@ const jobController = {
   create(req, res) {
     const [job, error] = validateJobDto(req.body);
     if (error) {
-      return res.status(400).render("error", {
+      return res.status(400).render("message", {
         message: error,
+        type: "error",
       });
     }
 
+    const maxId = jobs.length > 0 ? Math.max(...jobs.map((j) => j.id)) : 0;
     const newJob = {
-      id: jobs.length + 1,
+      id: maxId + 1,
       ...job,
     };
 
     jobs.push(newJob);
-    res.status(201).render("jobs", {
-      jobs: [newJob],
+    res.status(201).render("message", {
+      message: `Nova vaga criada com id "${newJob.id}"`,
+      type: "success",
     });
   },
 
@@ -70,15 +73,17 @@ const jobController = {
   findById(req, res) {
     const [id, error] = validateIdParams(req.params);
     if (error) {
-      return res.status(400).render("error", {
+      return res.status(400).render("message", {
         message: error,
+        type: "error",
       });
     }
 
     const index = jobs.findIndex((v) => v.id === id);
     if (index === -1) {
-      return res.status(404).render("error", {
+      return res.status(404).render("message", {
         message: "Vaga não encontrada",
+        type: "error",
       });
     }
 
@@ -90,41 +95,47 @@ const jobController = {
   delete(req, res) {
     const [id, error] = validateIdParams(req.params);
     if (error) {
-      return res.status(400).render("error", {
+      return res.status(400).render("message", {
         message: "Id inválido",
+        type: "error",
       });
     }
 
     const index = jobs.findIndex((v) => v.id === id);
     if (index === -1) {
-      return res.status(404).render("error", {
+      return res.status(404).render("message", {
         message: "Vaga não encontrada",
+        type: "error",
       });
     }
 
     const deleted = jobs.splice(index, 1);
-    res.status(200).render("success", {
-      message: `Vaga ${deleted[0].titulo} removida com sucesso`,
+    res.status(200).render("message", {
+      message: `Vaga "${deleted[0].id}" removida com sucesso`,
+      type: "success",
     });
   },
 
   update(req, res) {
     const [id, error] = validateIdParams(req.params);
     if (error)
-      return res.status(400).render("error", {
+      return res.status(400).render("message", {
         message: "Id inválido",
+        type: "error",
       });
 
     const index = jobs.findIndex((v) => v.id === id);
     if (index === -1)
-      return res.status(404).render("error", {
+      return res.status(404).render("message", {
         message: "Vaga não encontrada",
+        type: "error",
       });
 
     const [job, bodyError] = validateJobDto(req.body);
     if (bodyError) {
-      return res.status(400).render("error", {
+      return res.status(400).render("message", {
         message: bodyError,
+        type: "error",
       });
     }
 
@@ -134,8 +145,9 @@ const jobController = {
     };
 
     jobs[index] = newJob;
-    res.status(201).render("jobs", {
-      jobs: [newJob],
+    res.status(201).render("message", {
+      message: `Vaga "${id}" atualizada com sucesso`,
+      type: "success",
     });
   },
 };

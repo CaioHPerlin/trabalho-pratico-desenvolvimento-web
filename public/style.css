@@ -40,9 +40,12 @@ header > h1 {
 }
 
 header > h1::before {
-  content: "</>";
-  font-family: monospace;
-  color: var(--warning);
+  content: "";
+  display: inline-block;
+  width: 3.2rem;
+  height: 3.2rem;
+  background: url("./logo.png") no-repeat center center;
+  background-size: contain;
 }
 
 main {

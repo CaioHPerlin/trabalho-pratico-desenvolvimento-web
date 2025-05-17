@@ -1,0 +1,53 @@
+<head>
+  <title>trampo.find</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>trampo.find</h1>
+  </header>
+  <main>
+    <div class="jobs-count">
+      <i class="fas fa-briefcase"></i> <%= jobs.length %> vagas encontradas
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Tecnologias</th>
+          <th>Remuneração</th>
+          <th>Benefícios</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% jobs.forEach(j => { %>
+        <tr>
+          <td><strong><%= j.titulo %></strong></td>
+          <td>
+            <% j.conhecimentos.forEach(tech => { %>
+            <span class="tag"><%= tech.trim() %></span>
+            <% }); %>
+          </td>
+          <td>R$ <%= Number(j.remuneracao).toLocaleString('pt-BR') %></td>
+          <td><%= j.beneficios || '---' %></td>
+          <td>
+            <span
+              class="status status-<%= j.status === 'ativo' ? 'active' : 'inactive' %>"
+            >
+              <i
+                class="fas fa-<%= j.status === 'ativo' ? 'check-circle' : 'times-circle' %>"
+              ></i>
+              <%= j.status %>
+            </span>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </main>
+</body>

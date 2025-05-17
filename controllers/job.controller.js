@@ -92,6 +92,44 @@ const jobController = {
     });
   },
 
+  findByQuery(req, res) {
+    const { status, remuneracaoMin, titulo, beneficio } = req.query;
+    let filteredJobs = [...jobs];
+
+    if (status) {
+      filteredJobs = filteredJobs.filter(
+        (job) => job.status.toLowerCase() === status.toLowerCase()
+      );
+    }
+
+    if (remuneracaoMin) {
+      const minRemuneration = parseFloat(remuneracaoMin);
+      if (!isNaN(minRemuneration)) {
+        filteredJobs = filteredJobs.filter(
+          (job) => job.remuneracao >= minRemuneration
+        );
+      }
+    }
+
+    if (titulo) {
+      filteredJobs = filteredJobs.filter((job) =>
+        job.titulo.toLowerCase().includes(titulo.toLowerCase())
+      );
+    }
+
+    if (beneficio) {
+      filteredJobs = filteredJobs.filter((job) =>
+        job.beneficios.some((b) =>
+          b.toLowerCase().includes(beneficio.toLowerCase())
+        )
+      );
+    }
+
+    res.status(200).render("jobs", {
+      jobs: filteredJobs,
+    });
+  },
+
   delete(req, res) {
     const [id, error] = validateIdParams(req.params);
     if (error) {

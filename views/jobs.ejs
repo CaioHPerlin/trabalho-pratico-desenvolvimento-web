@@ -4,7 +4,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="http://localhost:3000/style.css" />
 </head>
 <body>
   <header>
@@ -12,11 +12,16 @@
   </header>
   <main>
     <div class="jobs-count">
-      <i class="fas fa-briefcase"></i> <%= jobs.length %> vagas encontradas
+      <i class="fas fa-briefcase"></i>
+      <% if(jobs.length > 0) { %> <%= jobs.length %> <%= jobs.length === 1 ?
+      'vaga encontrada' : 'vagas encontradas' %> <% } else { %>
+      <span class="no-jobs-message"> Nenhuma vaga encontrada </span>
+      <% } %>
     </div>
     <table>
       <thead>
         <tr>
+          <th>ID</th>
           <th>Título</th>
           <th>Conhecimentos</th>
           <th>Remuneração</th>
@@ -25,8 +30,15 @@
         </tr>
       </thead>
       <tbody>
-        <% jobs.forEach(j => { %>
+        <% if(jobs.length === 0) { %>
         <tr>
+          <td colspan="5" style="text-align: center">
+            Nenhuma vaga encontrada
+          </td>
+        </tr>
+        <%}%> <% jobs.forEach(j => { %>
+        <tr>
+          <td><%= j.id %></td>
           <td><strong><%= j.titulo %></strong></td>
           <td class="tag-container">
             <% j.conhecimentos.forEach(tech => { %>

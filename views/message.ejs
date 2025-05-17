@@ -1,0 +1,26 @@
+<head>
+  <title>trampo.find</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="http://localhost:3000/style.css" />
+</head>
+<body>
+  <header>
+    <h1>trampo.find</h1>
+  </header>
+  <main>
+    <div class="message">
+      <% if(type === 'error') { %>
+      <span class="error-message">
+        <i class="fa fa-exclamation-triangle"></i> <%= message %>
+      </span>
+      <% } else { %>
+      <span class="success-message">
+        <i class="fa fa-circle-check"></i> <%= message %>
+      </span>
+      <% } %>
+    </div>
+  </main>
+</body>

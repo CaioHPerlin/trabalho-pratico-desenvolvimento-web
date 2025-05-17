@@ -6,6 +6,7 @@
   --light: #f8f9fa;
   --success: #38b000;
   --warning: #ffbe0b;
+  --error: #ff3860;
 }
 
 * {
@@ -123,12 +124,26 @@ tbody tr:hover {
 
 .tag {
   text-wrap: nowrap;
-  /* display: inline-block; */
   background: rgba(255, 190, 11, 0.2);
   padding: 0.3rem 0.6rem;
-  /* color: var(--warning);
   border-radius: 4px;
   font-size: 0.8rem;
-  margin-right: 0.3rem;
-  margin-bottom: 0.6rem; */
+  color: var(--warning);
+}
+
+.message {
+  width: 100%;
+  text-align: center;
+  color: var(--error);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.error-message {
+  color: var(--error);
+}
+
+.success-message {
+  color: var(--success);
 }

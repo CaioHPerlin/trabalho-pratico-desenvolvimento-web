@@ -5,7 +5,7 @@ const jobController = require("../controllers/job.controller");
 
 jobRoutes.post("/", jobController.create);
 jobRoutes.get("/", jobController.findAll);
-jobRoutes.get("/query", jobController.findByQuery);
+jobRoutes.get("/search", jobController.findByQuery);
 jobRoutes.get("/:id", jobController.findById);
 jobRoutes.delete("/:id", jobController.delete);
 jobRoutes.put("/:id", jobController.update);

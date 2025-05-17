@@ -18,7 +18,7 @@
       <thead>
         <tr>
           <th>Título</th>
-          <th>Tecnologias</th>
+          <th>Conhecimentos</th>
           <th>Remuneração</th>
           <th>Benefícios</th>
           <th>Status</th>
@@ -28,13 +28,13 @@
         <% jobs.forEach(j => { %>
         <tr>
           <td><strong><%= j.titulo %></strong></td>
-          <td>
+          <td class="tag-container">
             <% j.conhecimentos.forEach(tech => { %>
             <span class="tag"><%= tech.trim() %></span>
             <% }); %>
           </td>
-          <td>R$ <%= Number(j.remuneracao).toLocaleString('pt-BR') %></td>
-          <td><%= j.beneficios || '---' %></td>
+          <td>R$ <%= j.remuneracao.toLocaleString('pt-BR') %></td>
+          <td><%= j.beneficios.join(', ') || '---' %></td>
           <td>
             <span
               class="status status-<%= j.status === 'ativo' ? 'active' : 'inactive' %>"
@@ -42,7 +42,8 @@
               <i
                 class="fas fa-<%= j.status === 'ativo' ? 'check-circle' : 'times-circle' %>"
               ></i>
-              <%= j.status %>
+              <%= j.status[0].toUpperCase() + j.status.slice(1, j.status.length)
+              %>
             </span>
           </td>
         </tr>

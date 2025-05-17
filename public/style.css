@@ -52,10 +52,13 @@ main {
 }
 
 .jobs-count {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 0.4rem;
   background: rgba(58, 134, 255, 0.2);
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  display: inline-block;
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
 }
@@ -95,7 +98,7 @@ tbody tr:hover {
 
 .status {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.4rem;
   padding: 0.3rem 0.6rem;
   border-radius: 20px;
   font-size: 0.8rem;
@@ -112,13 +115,20 @@ tbody tr:hover {
   color: #ff9e9e;
 }
 
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
 .tag {
-  display: inline-block;
+  text-wrap: nowrap;
+  /* display: inline-block; */
   background: rgba(255, 190, 11, 0.2);
-  color: var(--warning);
   padding: 0.3rem 0.6rem;
+  /* color: var(--warning);
   border-radius: 4px;
   font-size: 0.8rem;
   margin-right: 0.3rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.6rem; */
 }
